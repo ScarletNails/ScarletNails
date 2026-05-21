@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scarlet Nails - Mi Cuenta</title>
+
+    <link rel="icon" href="imagenes/logo-real.jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            --rosa: #f5a3d3;
+            --rosa-oscuro: #e38bc2;
+            --negro: #1a1a1a;
+            --gris: #4d4d4d;
+            --fondo: #fefafc;
+            --blanco: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--fondo);
+            font-family: 'Poppins', sans-serif;
+            color: var(--negro);
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: var(--negro);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rosa);
+        }
+
+        .logo-nombre {
+            color: var(--rosa);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            transition: .3s;
+        }
+
+        .menu a:hover {
+            color: var(--rosa);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--rosa);
+            border-radius: 3px;
+            transition: .3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translateY(11px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-11px);
+        }
+
+        /* OVERLAY */
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            z-index: 998;
+        }
+
+        .menu-overlay.active {
+            display: block;
+        }
+
+        /* MAIN */
+
+        .main-content {
+            padding: 100px 20px 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .auth-container,
+        .profile-container {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(245, 163, 211, 0.2);
+        }
+
+        .auth-panel {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .brand-side {
+            flex: 1;
+            background: linear-gradient(135deg, #2a1a24, #3d2532);
+            color: var(--rosa);
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-side h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .deco-text {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-side {
+            flex: 1;
+            padding: 50px;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .form-sub {
+            color: #b06a8c;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--rosa-oscuro);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 1px solid #ffd3ea;
+            border-radius: 25px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--rosa);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            background: #2a1a24;
+            color: var(--rosa);
+            cursor: pointer;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--rosa);
+            color: #2a1a24;
+        }
+
+        .switch-text {
+            margin-top: 20px;
+            text-align: center;
+            font-size: .9rem;
+        }
+
+        .switch-link {
+            color: var(--rosa-oscuro);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* PERFIL */
+
+        .profile-banner {
+            height: 140px;
+            background: linear-gradient(90deg, var(--rosa), var(--rosa-oscuro));
+        }
+
+        .profile-avatar-section {
+            display: flex;
+            justify-content: center;
+            margin-top: -60px;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            background: white;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-icon {
+            position: absolute;
+            bottom: 5px;
+            right: calc(50% - 70px);
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-name {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile-name h2 {
+            font-size: 2rem;
+        }
+
+        .profile-bio {
+            text-align: center;
+            margin: 20px;
+            color: #5a3a4a;
+        }
+
+        .profile-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--rosa-oscuro);
+            background: transparent;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .btn-outline:hover {
+            background: var(--rosa-oscuro);
+            color: white;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:800px) {
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            #nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--negro);
+                transition: .3s;
+                z-index: 999;
+                padding-top: 100px;
+            }
+
+            #nav-menu.active {
+                right: 0;
+            }
+
+            .menu {
+                flex-direction: column;
+                padding-left: 30px;
+            }
+
+            .auth-panel {
+                flex-direction: column;
+            }
+
+            .brand-side,
+            .form-side {
+                padding: 35px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            <img src="imagenes/logo real. .jpg" alt="Logo Scarlet Nails" class="logo-img">
+            <h2 class="logo-nombre">Scarlet Nails</h2>
+        </div>
+
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="nuestros_servicios.html">Nuestros Servicios</a></li>
+                <li><a href="agendar_citas.html">Agendar cita</a></li>
+                <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="inicia_secion.html" id="menu-login">Iniciar Sesión</a></li>
+                <li><a href="register.html" id="menu-register">Registrarse</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="menu-overlay" id="overlay"></div>
+
+    <!-- MAIN -->
+
+    <div class="main-content">
+
+        <!-- LOGIN / REGISTER -->
+
+        <div class="auth-container" id="authContainer">
+
+            <div class="auth-panel">
+
+                <div class="brand-side">
+                    <h1>Scarlet Nails</h1>
+
+                    <p>
+                        Tu espacio de belleza con estilo.
+                        Accede a tu mundo de uñas perfectas.
+                    </p>
+
+                    <div class="deco-text">
+                        <span>✨ Elegancia</span>
+                        <span>🌸 Modernidad</span>
+                        <span>💅 Calidad</span>
+                    </div>
+                </div>
+
+                <div class="form-side">
+
+                    <!-- LOGIN -->
+
+                 <form id="loginForm" action="login.php" method="POST">
+                        <div class="form-title">Bienvenida</div>
+
+                        <div class="form-sub">
+                            Inicia sesión para continuar
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+
+                           <input type="email" id="loginEmail" name="correo" placeholder="Correo electrónico" required>
+                              
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+
+                          <input type="password" id="loginPassword" name="contraseña" placeholder="Contraseña" required>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            Iniciar sesión
+                        </button>
+
+                        <div class="switch-text">
+                            ¿No tienes cuenta?
+                            <span class="switch-link" id="goToRegister">
+                                Regístrate
+                            </span>
+                        </div>
+
+                    </form>
+
+                    <!-- REGISTER -->
+
+                    <form id="registerForm" action="register.php" method="POST">
+
+    <div class="form-title">Crear cuenta</div>
+
+    <div class="form-sub">
+        Únete a Scarlet Nails ✨
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text"
+               id="regName"
+               name="nombre"
+               placeholder="Nombre completo"
+               required>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email"
+               id="regEmail"
+               name="correo"
+               placeholder="Correo electrónico"
+               required>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password"
+               id="regPassword"
+               name="password"
+               placeholder="Contraseña"
+               minlength="6"
+               required>
+    </div>
+
+    <div class="input-group">
+        <i class="fas fa-check-circle"></i>
+        <input type="password"
+               id="regConfirmPass"
+               placeholder="Confirmar contraseña"
+               required>
+    </div>
+
+    <button type="submit" class="btn-primary">
+        Registrarse
+    </button>
+
+    <div class="switch-text">
+        ¿Ya tienes cuenta?
+        <span class="switch-link" id="goToLogin">
+            Inicia sesión
+        </span>
+    </div>
+
+</form>
+                   
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PERFIL -->
+
+        <div class="profile-container hidden" id="profileContainer">
+
+            <div class="profile-banner"></div>
+
+            <div class="profile-avatar-section">
+
+                <div class="profile-avatar">
+                    <img id="profileAvatarImg"
+                        alt="Foto de perfil"
+                        src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+                </div>
+
+                <div class="camera-icon" id="editProfilePic">
+                    <i class="fas fa-camera"></i>
+                </div>
+
+                <input type="file"
+                    id="profilePicInput"
+                    accept="image/*"
+                    hidden>
+
+            </div>
+
+            <div class="profile-name">
+                <h2 id="profileFullName">Usuario</h2>
+                <p id="profileUsername">@usuario</p>
+            </div>
+
+            <div class="profile-bio" id="profileBioDisplay">
+                ✨ Bienvenida a Scarlet Nails ✨
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn-outline" id="editBioBtn">
+                    Editar biografía
+                </button>
+
+                <button class="btn-outline" id="logoutBtn">
+                    Cerrar sesión
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+
+// ================= VERIFICAR SESIÓN AL CARGAR =================
+async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.autenticado === true) {
+            document.getElementById('authContainer').classList.add('hidden');
+            document.getElementById('profileContainer').classList.remove('hidden');
+            
+            document.getElementById('profileFullName').textContent = data.nombre;
+            document.getElementById('profileUsername').textContent = data.correo;
+            
+            const fotoGuardada = localStorage.getItem('foto_perfil');
+            if (fotoGuardada) {
+                document.getElementById('profileAvatarImg').src = fotoGuardada;
+            }
+            
+            const bioGuardada = localStorage.getItem('biografia');
+            if (bioGuardada) {
+                document.getElementById('profileBioDisplay').textContent = bioGuardada;
+            }
+        }
+    } catch (error) {
+        console.error('Error al verificar sesión:', error);
+    }
+}
+
+// ================= SWITCH ENTRE LOGIN Y REGISTRO =================
+document.getElementById('goToRegister').addEventListener('click', () => {
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('registerForm').classList.remove('hidden');
+});
+
+document.getElementById('goToLogin').addEventListener('click', () => {
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('loginForm').classList.remove('hidden');
+});
+
+// ================= LOGIN =================
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch('login.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data.trim() === "OK") {
+            window.location.reload();
+        } else {
+            alert(data);
+        }
+    })
+    .catch(() => {
+        alert("Error de conexión con el servidor");
+    });
+});
+
+// ================= REGISTRO =================
+document.getElementById('registerForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const pass = document.getElementById('regPassword').value;
+    const confirm = document.getElementById('regConfirmPass').value;
+
+    if (pass !== confirm) {
+        alert('Las contraseñas no coinciden');
+        return;
+    }
+
+    const formData = new FormData(this);
+
+    fetch('register.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        if (data.trim() === "OK") {
+            alert('Cuenta creada correctamente 💅');
+            window.location.reload();
+        } else {
+            alert(data);
+        }
+    })
+    .catch(() => {
+        alert("Error de conexión con el servidor");
+    });
+});
+
+// ================= CERRAR SESIÓN =================
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    window.location.href = 'cerrar_sesion.php';
+});
+
+// ================= FOTO DE PERFIL =================
+document.getElementById('editProfilePic').addEventListener('click', () => {
+    document.getElementById('profilePicInput').click();
+});
+
+document.getElementById('profilePicInput').addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('profileAvatarImg').src = e.target.result;
+            localStorage.setItem('foto_perfil', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// ================= EDITAR BIOGRAFÍA =================
+document.getElementById('editBioBtn').addEventListener('click', () => {
+    const nuevaBio = prompt('Escribe tu nueva biografía');
+    if (nuevaBio) {
+        document.getElementById('profileBioDisplay').textContent = nuevaBio;
+        localStorage.setItem('biografia', nuevaBio);
+    }
+});
+
+// ================= INICIAR VERIFICACIÓN =================
+document.addEventListener('DOMContentLoaded', verificarSesion);
+
+
+
+
+
+
+
+
+
+
+</script>
+    
+
+</body>
+
+</html>
