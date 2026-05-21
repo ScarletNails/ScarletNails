@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scarlet Nails - Agendar Cita</title>
+    <link rel="icon" href="/imagenes/logo-real.jpg">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        /* ================ ESTILOS SCARLET NAILS ================ */
+        :root {
+            --rosa: #f5a3d3;
+            --rosa-oscuro: #e38bc2;
+            --negro: #111111;
+            --gris: #5a5a5a;
+            --gris-claro: #8a8a8a;
+            --fondo: #fffafd;
+            --blanco: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--fondo);
+            font-family: 'Poppins', sans-serif;
+            color: var(--negro);
+            line-height: 1.6;
+        }
+
+        /* ================ HEADER ================ */
+        .header {
+            background: var(--negro);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(245, 163, 211, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rosa);
+            transition: var(--transition);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            border-color: var(--blanco);
+        }
+
+        .logo-nombre {
+            color: var(--rosa);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rosa);
+            transition: var(--transition);
+        }
+
+        .menu a:hover::after,
+        .menu a.active::after {
+            width: 100%;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: var(--rosa);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--rosa);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ================ SECCIÓN AGENDAR CITA ================ */
+        .formulario-cita-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .titulo-seccion::before {
+            content: '✨';
+            font-size: 2rem;
+            opacity: 0.6;
+            margin-right: 10px;
+        }
+
+        .titulo-seccion::after {
+            content: '✨';
+            font-size: 2rem;
+            opacity: 0.6;
+            margin-left: 10px;
+        }
+
+        .subtitulo-seccion {
+            text-align: center;
+            color: var(--gris);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Tarjetas de selección */
+        .opciones-seleccion {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .card-seleccion {
+            background: var(--blanco);
+            border-radius: 30px;
+            padding: 40px 35px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(245, 163, 211, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .card-seleccion:hover {
+            transform: translateY(-8px);
+            border-color: var(--rosa);
+            box-shadow: 0 20px 40px rgba(245, 163, 211, 0.15);
+        }
+
+        .card-seleccion.seleccionada {
+            background: linear-gradient(135deg, var(--rosa), var(--rosa-oscuro));
+            border-color: var(--negro);
+        }
+
+        .card-seleccion.seleccionada h3,
+        .card-seleccion.seleccionada p,
+        .card-seleccion.seleccionada .icono-seleccion {
+            color: var(--negro);
+        }
+
+        .icono-seleccion {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .card-seleccion h3 {
+            font-size: 1.6rem;
+            color: var(--negro);
+            margin-bottom: 10px;
+        }
+
+        .card-seleccion p {
+            color: var(--gris);
+        }
+
+        /* Contenido dinámico - por defecto OCULTO */
+        .contenido-dinamico {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .contenido-dinamico.activo {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* WhatsApp */
+        .card-opcion {
+            background: var(--blanco);
+            border-radius: 30px;
+            padding: 40px 35px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(245, 163, 211, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.05);
+            background: #128C7E;
+        }
+
+        /* Formulario */
+        .formulario-cita {
+            background: var(--blanco);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(245, 163, 211, 0.2);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .formulario-cita h3 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .campo {
+            margin-bottom: 20px;
+        }
+
+        .campo label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--negro);
+        }
+
+        .campo input,
+        .campo select,
+        .campo textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(245, 163, 211, 0.3);
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .campo input:focus,
+        .campo select:focus,
+        .campo textarea:focus {
+            outline: none;
+            border-color: var(--rosa);
+            box-shadow: 0 0 0 3px rgba(245, 163, 211, 0.1);
+        }
+
+        .fila {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn-enviar {
+            width: 100%;
+            padding: 14px;
+            background: var(--negro);
+            color: var(--rosa);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn-enviar:hover {
+            background: var(--rosa);
+            color: var(--negro);
+            transform: translateY(-2px);
+        }
+
+        .nota {
+            font-size: 0.85rem;
+            color: var(--gris-claro);
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Info general */
+        .info-general {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(245, 163, 211, 0.05);
+            border-radius: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-icono {
+            font-size: 2rem;
+        }
+
+        .info-item strong {
+            color: var(--negro);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            #nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 280px;
+                height: 100vh;
+                background: var(--negro);
+                padding: 100px 25px;
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+
+            #nav-menu.active {
+                right: 0;
+            }
+
+            .menu {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .formulario-cita-container {
+                padding: 40px 20px;
+            }
+
+            .titulo-seccion {
+                font-size: 2rem;
+            }
+
+            .fila {
+                grid-template-columns: 1fr;
+            }
+
+            .formulario-cita {
+                padding: 25px;
+            }
+
+            .info-general {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .info-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ================ NOTIFICACIONES PROFESIONALES ================ */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            border-radius: 12px;
+            padding: 16px 24px;
+            min-width: 280px;
+            max-width: 380px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 9999;
+            font-family: 'Poppins', sans-serif;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .toast-notification.show {
+            transform: translateX(0);
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .toast-message {
+            font-size: 0.85rem;
+            color: #5a5a5a;
+            line-height: 1.5;
+        }
+
+        .toast-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.2s;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .toast-close:hover {
+            color: #999;
+        }
+
+        /* Tipos de notificaciones */
+        .toast-notification.success {
+            border-left-color: #2ecc71;
+            background: linear-gradient(135deg, #ffffff, #f0fff4);
+        }
+
+        .toast-notification.error {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #ffffff, #fff5f5);
+        }
+
+        .toast-notification.warning {
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #ffffff, #fffbf0);
+        }
+
+        .toast-notification.info {
+            border-left-color: #f5a3d3;
+            background: linear-gradient(135deg, #ffffff, #fffafd);
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .toast-notification {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                min-width: auto;
+                max-width: none;
+                padding: 14px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/logo real. .jpg" alt="Logo Scarlet Nails" class="logo-img">
+            <h2 class="logo-nombre">Scarlet Nails</h2>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="nuestros_servicios.html">Nuestros Servicios</a></li>
+                <li><a href="agendar_citas.html">Agendar cita</a></li>
+                <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="inicia_secion.html" id="menu-login">Iniciar Sesión</a></li>
+                <li><a href="register.html" id="menu-register">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= SECCIÓN AGENDAR CITA ================= -->
+    <section id="Agendar-cita">
+        <div class="formulario-cita-container">
+            <h2 class="titulo-seccion">📅 Agendar cita</h2>
+            <p class="subtitulo-seccion">Elige cómo quieres reservar tu turno ✨</p>
+
+            <!-- Tarjetas de selección -->
+            <div class="opciones-seleccion">
+                <div class="card-seleccion" data-opcion="whatsapp">
+                    <div class="icono-seleccion">📱</div>
+                    <h3>WhatsApp</h3>
+                    <p>Rápido y directo</p>
+                </div>
+                <div class="card-seleccion" data-opcion="formulario">
+                    <div class="icono-seleccion">📋</div>
+                    <h3>Formulario</h3>
+                    <p>Más detallado</p>
+                </div>
+            </div>
+
+            <!-- Contenido WhatsApp (oculto al inicio) -->
+            <div id="contenido-whatsapp" class="contenido-dinamico">
+                <div class="card-opcion">
+                    <div class="icono-opcion">📱</div>
+                    <h3>Reserva por WhatsApp</h3>
+                    <p>La forma más rápida, te respondemos en minutos</p>
+                    <a href="https://wa.me/18094900581?text=Hola%20Scarlet%20Nails%2C%20quiero%20agendar%20una%20cita%20para%20%5BSERVICIO%5D%20el%20d%C3%ADa%20%5BFECHA%5D%20a%20las%20%5BHORA%5D.%20Mi%20nombre%20es%20%5BNOMBRE%5D."
+                        class="btn-whatsapp" target="_blank">
+                        📲 Enviar mensaje por WhatsApp →
+                    </a>
+                    <p class="nota">Disponible las 12 horas del día, respondemos en horario de atención</p>
+                </div>
+            </div>
+
+            <!-- Contenido Formulario (oculto al inicio - SALE CUANDO SELECCIONAN) -->
+            <div id="contenido-formulario" class="contenido-dinamico">
+                <div class="formulario-cita">
+                    <h3>📋 Completa el formulario</h3>
+                    <form id="formCita">
+                        <div class="campo">
+                            <label>Nombre completo:</label>
+                            <input type="text" id="cita_nombre" placeholder="Ej: María Pérez" required>
+                        </div>
+                        <div class="campo">
+                            <label>WhatsApp / Teléfono:</label>
+                            <input type="tel" id="cita_telefono" placeholder="809-000-0000" required>
+                        </div>
+                        <div class="campo">
+                            <label>Correo electrónico (opcional):</label>
+                            <input type="email" id="cita_email" placeholder="tucorreo@ejemplo.com">
+                        </div>
+                        <div class="campo">
+                            <label>Servicio deseado:</label>
+                            <select id="cita_servicio" required>
+                                <option value="">Selecciona un servicio</option>
+                                <option value="acrilicas">Uñas Acrílicas</option>
+                                <option value="gel">Esmaltado en Gel</option>
+                                <option value="disenos">Diseños Personalizados</option>
+                                <option value="manicure">Manicure</option>
+                                <option value="pedicure">Pedicure</option>
+                            </select>
+                        </div>
+                        <div class="fila">
+                            <div class="campo">
+                                <label>Fecha preferida:</label>
+                                <input type="date" id="cita_fecha" required>
+                            </div>
+                            <div class="campo">
+                                <label>Hora preferida:</label>
+                                <input type="time" id="cita_hora" required>
+                            </div>
+                        </div>
+                        <div class="campo">
+                            <label>Comentarios adicionales:</label>
+                            <textarea id="cita_comentarios" rows="3"
+                                placeholder="Algún detalle que quieras agregar..."></textarea>
+                        </div>
+                        <button type="button" id="btnEnviarCita" class="btn-enviar">📅 Solicitar cita</button>
+                        <p class="nota">Te contactaremos en menos de 30 minutos para confirmar tu cita</p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Información general -->
+            <div class="info-general">
+                <div class="info-item">
+                    <span class="info-icono">🕐</span>
+                    <div><strong>Horario:</strong><br>Lunes a Viernes: 9am - 7pm<br>Sábados: 10am - 5pm<br>Domingos:
+                        Cerrado</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icono">📍</span>
+                    <div><strong>Ubicación:</strong><br>Santo Domingo, Este km 17 de las Américas</div>
+                </div>
+                <div class="info-item">
+                    <span class="info-icono">📞</span>
+                    <div><strong>Teléfono:</strong><br>809-490-0581 (llamadas)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contenedor de notificaciones -->
+    <div id="toast-container"></div>
+
+    <!-- ================ JAVASCRIPT ================ -->
+    <script>
+        // Menú hamburguesa
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+                });
+
+                document.querySelectorAll('.menu a').forEach(link => {
+                    link.addEventListener('click', function () {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+
+            // ================ SELECCIÓN DE OPCIÓN ================
+            const opciones = document.querySelectorAll('.card-seleccion');
+            const whatsappContent = document.getElementById('contenido-whatsapp');
+            const formularioContent = document.getElementById('contenido-formulario');
+
+            function mostrarOpcion(opcion) {
+                // Ocultar ambos
+                whatsappContent.classList.remove('activo');
+                formularioContent.classList.remove('activo');
+
+                // Mostrar solo el seleccionado
+                if (opcion === 'whatsapp') {
+                    whatsappContent.classList.add('activo');
+                } else if (opcion === 'formulario') {
+                    formularioContent.classList.add('activo');
+                }
+            }
+
+            opciones.forEach(opcion => {
+                opcion.addEventListener('click', function () {
+                    const seleccion = this.dataset.opcion;
+
+                    // Quitar clase seleccionada de todas
+                    opciones.forEach(opt => opt.classList.remove('seleccionada'));
+
+                    // Agregar clase seleccionada a la actual
+                    this.classList.add('seleccionada');
+
+                    // Mostrar contenido correspondiente
+                    mostrarOpcion(seleccion);
+                });
+            });
+
+            // ================ ENVÍO DE CITA CON VALIDACIÓN DE SESIÓN ================
+            const btnEnviar = document.getElementById('btnEnviarCita');
+
+            if (btnEnviar) {
+                btnEnviar.addEventListener('click', function () {
+                    const usuarioActual = localStorage.getItem('usuarioActual');
+
+                    const nombre = document.getElementById('cita_nombre')?.value;
+                    const telefono = document.getElementById('cita_telefono')?.value;
+                    const email = document.getElementById('cita_email')?.value;
+                    const servicio = document.getElementById('cita_servicio')?.value;
+                    const fecha = document.getElementById('cita_fecha')?.value;
+                    const hora = document.getElementById('cita_hora')?.value;
+                    const comentarios = document.getElementById('cita_comentarios')?.value;
+
+                    if (!nombre || !telefono || !servicio || !fecha || !hora) {
+                        alert('Por favor completa todos los campos obligatorios');
+                        return;
+                    }
+
+                    if (!usuarioActual) {
+                        const datosCita = { nombre, telefono, email, servicio, fecha, hora, comentarios };
+                        localStorage.setItem('citaPendiente', JSON.stringify(datosCita));
+                        showToast('Debes iniciar sesión para agendar una cita. Serás redirigido.', 'warning', 'Inicio de sesión');
+                        window.location.href = 'inicia_secion.html';
+                        return;
+                    }
+
+                    // Si hay sesión, enviar cita
+                    alert('✅ Cita agendada exitosamente');
+                    document.getElementById('formCita').reset();
+                    // Aquí puedes agregar el fetch a PHP para guardar en BD
+                });
+            }
+
+            // ================ RECUPERAR CITA PENDIENTE ================
+            const citaPrecargar = localStorage.getItem('precargarCita');
+            if (citaPrecargar) {
+                const cita = JSON.parse(citaPrecargar);
+                if (document.getElementById('cita_nombre')) document.getElementById('cita_nombre').value = cita.nombre || '';
+                if (document.getElementById('cita_telefono')) document.getElementById('cita_telefono').value = cita.telefono || '';
+                if (document.getElementById('cita_email')) document.getElementById('cita_email').value = cita.email || '';
+                if (document.getElementById('cita_servicio')) document.getElementById('cita_servicio').value = cita.servicio || '';
+                if (document.getElementById('cita_fecha')) document.getElementById('cita_fecha').value = cita.fecha || '';
+                if (document.getElementById('cita_hora')) document.getElementById('cita_hora').value = cita.hora || '';
+                if (document.getElementById('cita_comentarios')) document.getElementById('cita_comentarios').value = cita.comentarios || '';
+                localStorage.removeItem('precargarCita');
+            }
+
+            // Verificar cita pendiente al cargar
+            const citaPendiente = localStorage.getItem('citaPendiente');
+            if (citaPendiente && window.location.href.includes('agendar_citas.html')) {
+                const cita = JSON.parse(citaPendiente);
+                if (confirm('Tienes una cita pendiente de tu visita anterior. ¿Quieres recuperar los datos?')) {
+                    if (document.getElementById('cita_nombre')) document.getElementById('cita_nombre').value = cita.nombre || '';
+                    if (document.getElementById('cita_telefono')) document.getElementById('cita_telefono').value = cita.telefono || '';
+                    if (document.getElementById('cita_email')) document.getElementById('cita_email').value = cita.email || '';
+                    if (document.getElementById('cita_servicio')) document.getElementById('cita_servicio').value = cita.servicio || '';
+                    if (document.getElementById('cita_fecha')) document.getElementById('cita_fecha').value = cita.fecha || '';
+                    if (document.getElementById('cita_hora')) document.getElementById('cita_hora').value = cita.hora || '';
+                    if (document.getElementById('cita_comentarios')) document.getElementById('cita_comentarios').value = cita.comentarios || '';
+                }
+                localStorage.removeItem('citaPendiente');
+            }
+        });
+        // ================ NOTIFICACIONES PROFESIONALES ================
+        function showToast(message, type = 'info', title = '') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const titles = {
+                success: 'Éxito',
+                error: 'Error',
+                warning: 'Atención',
+                info: 'Información'
+            };
+
+            const finalTitle = title || titles[type] || 'Información';
+
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${type}`;
+            toast.innerHTML = `
+        <div class="toast-content">
+            <div class="toast-title">${finalTitle}</div>
+            <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close">✕</button>
+    `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => toast.classList.add('show'), 10);
+
+            const closeBtn = toast.querySelector('.toast-close');
+            closeBtn.addEventListener('click', () => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            });
+
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }, 4000);
+        }
+
+
+
+
+
+
+
+async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.autenticado === true) {
+            // Cambiar el texto del menú
+            const menuLogin = document.getElementById('menu-login');
+            if (menuLogin) {
+                menuLogin.textContent = '👤 ' + data.nombre;
+                menuLogin.href = 'inicia_secion.html';
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', verificarSesion);
+    </script>
+</body>
+
+</html>

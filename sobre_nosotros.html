@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scarlet Nails - Sobre Nosotros</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ================ VARIABLES GLOBALES ================ */
+        :root {
+            --rosa: #f5a3d3;
+            --rosa-oscuro: #e38bc2;
+            --negro: #1a1a1a;
+            --gris: #4d4d4d;
+            --gris-claro: #7a7a7a;
+            --fondo: #fefafc;
+            --blanco: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--fondo);
+            font-family: 'Poppins', sans-serif;
+            color: var(--negro);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ================ HEADER ================ */
+        .header {
+            background: var(--negro);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(245, 163, 211, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rosa);
+            transition: var(--transition);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            border-color: var(--blanco);
+        }
+
+        .logo-nombre {
+            color: var(--rosa);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .menu a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rosa);
+            transition: var(--transition);
+        }
+
+        .menu a:hover::after,
+        .menu a.active::after {
+            width: 100%;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: var(--rosa);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--rosa);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ================ SOBRE NOSOTROS ================ */
+        .sobre-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            font-size: 3.2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--negro);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .titulo-seccion::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rosa), var(--rosa-oscuro), var(--rosa));
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .sobre-texto {
+            background: var(--blanco);
+            padding: 45px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(245, 163, 211, 0.2);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--gris);
+            transition: var(--transition);
+            margin-bottom: 50px;
+        }
+
+        .sobre-texto:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 50px rgba(245, 163, 211, 0.1);
+            border-color: var(--rosa);
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: var(--blanco);
+            padding: 40px 35px;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(245, 163, 211, 0.15);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.08);
+            border-color: var(--rosa);
+        }
+
+        .card h3 {
+            font-size: 1.9rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--rosa);
+            padding-left: 18px;
+        }
+
+        .card p {
+            color: var(--gris);
+            line-height: 1.7;
+        }
+
+        .valores-box {
+            background: rgba(245, 163, 211, 0.03);
+            border-radius: 50px;
+            padding: 50px 30px;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .valores-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .valor-badge {
+            background: var(--blanco);
+            padding: 12px 32px;
+            border-radius: 60px;
+            border: 1px solid rgba(245, 163, 211, 0.4);
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .valor-badge:hover {
+            background: var(--rosa);
+            color: var(--blanco);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 163, 211, 0.3);
+        }
+
+        /* ================ ORGANIGRAMA ================ */
+        .org-wrapper {
+            background: rgba(245, 163, 211, 0.02);
+            border-radius: 70px;
+            padding: 60px 40px;
+            margin-top: 40px;
+        }
+
+        .org-nivel1 {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .org-nivel1::after {
+            content: '';
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--rosa), transparent);
+        }
+
+        .org-nivel2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+
+        .org-area {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 35px;
+            padding: 30px 25px;
+            border: 1px solid rgba(245, 163, 211, 0.2);
+        }
+
+        .area-title {
+            font-size: 1.6rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--rosa);
+            display: inline-block;
+            width: 100%;
+        }
+
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 25px;
+        }
+
+        .org-card {
+            background: var(--blanco);
+            border-radius: 28px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(245, 163, 211, 0.2);
+            transition: var(--transition);
+        }
+
+        .org-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--rosa);
+        }
+
+        .org-card.direccion {
+            border: 2px solid var(--rosa);
+            background: linear-gradient(145deg, var(--blanco), #fff9fc);
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .org-foto {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--rosa);
+            margin: 0 auto 15px;
+            transition: var(--transition);
+        }
+
+        .org-card:hover .org-foto {
+            transform: scale(1.05);
+            border-color: var(--rosa-oscuro);
+        }
+
+        .org-card h4 {
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .org-puesto {
+            color: var(--rosa);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .org-descripcion {
+            color: var(--gris);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ================ RESPONSIVE ================ */
+        @media (max-width: 1100px) {
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                right: 25px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            #nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 280px;
+                height: 100vh;
+                background: var(--negro);
+                padding: 120px 25px;
+                transition: right 0.3s;
+                z-index: 999;
+                border-left: 1px solid rgba(245, 163, 211, 0.2);
+            }
+
+            #nav-menu.active {
+                right: 0;
+            }
+
+            .menu {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .org-nivel2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+
+            .org-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            #nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 280px;
+                height: 100vh;
+                background: var(--negro);
+                padding: 100px 25px 40px;
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+
+            #nav-menu.active {
+                right: 0;
+            }
+
+            .menu {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .menu a {
+                font-size: 1.1rem;
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sobre-wrapper {
+                padding: 30px 20px;
+            }
+
+            .titulo-seccion {
+                font-size: 2.2rem;
+            }
+
+            .card h3 {
+                font-size: 1.5rem;
+            }
+
+            .org-card.direccion {
+                max-width: 100%;
+            }
+        }
+
+        /* ================ OVERLAY ================ */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/logo real. .jpg" alt="Logo Scarlet Nails" class="logo-img">
+            <h2 class="logo-nombre">Scarlet Nails</h2>
+        </div>
+
+        <!-- BOTÓN HAMBURGUESA (para móvil) -->
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="nuestros_servicios.html">Nuestros Servicios</a></li>
+                <li><a href="agendar_citas.html">Agendar cita</a></li>
+                <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="inicia_secion.html" id="menu-login">Iniciar Sesión</a></li>
+                <li><a href="register.html" id="menu-register">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= SOBRE NOSOTROS ================= -->
+    <div class="sobre-wrapper">
+        <h2 class="titulo-seccion">🌸 Sobre Nosotros</h2>
+        <div class="sobre-texto">
+            <p><strong>Scarlet Nails</strong> es un salón especializado en el cuidado, diseño y embellecimiento
+                profesional de uñas. Nuestro objetivo es resaltar la belleza natural de cada clienta mediante servicios
+                personalizados, modernos y realizados con altos estándares de calidad. Nos enfocamos en ofrecer una
+                experiencia única donde la elegancia, la comodidad y el buen servicio se combinan para brindar
+                resultados impecables.</p>
+        </div>
+
+        <div class="grid-2cols">
+            <div class="card">
+                <h3>📖 Nuestra Historia</h3>
+                <p>Scarlet Nails nació con la pasión por el arte de las uñas y el deseo de crear un espacio dedicado al
+                    bienestar y la belleza. Desde nuestros inicios, buscamos ofrecer un servicio diferente, donde cada
+                    detalle importa y cada clienta se sienta especial. Con esfuerzo y dedicación, hemos crecido
+                    ofreciendo diseños innovadores y técnicas actualizadas que reflejan creatividad y profesionalismo.
+                </p>
+            </div>
+            <div class="card">
+                <h3>💭 Filosofía de Trabajo</h3>
+                <p>En Scarlet Nails creemos que la belleza comienza con el cuidado y la confianza. Nuestra filosofía se
+                    basa en brindar atención personalizada, trabajar con responsabilidad y mantener altos niveles de
+                    higiene y organización. Cada servicio es realizado con paciencia, amor por el detalle y compromiso
+                    con la satisfacción del cliente.</p>
+            </div>
+            <div class="card">
+                <h3>🎯 Misión</h3>
+                <p>Brindar servicios profesionales de uñas con calidad, creatividad y seguridad, ofreciendo una
+                    experiencia cómoda y personalizada que permita a cada cliente sentirse segura, hermosa y satisfecha.
+                </p>
+            </div>
+            <div class="card">
+                <h3>🔮 Visión</h3>
+                <p>Ser un salón reconocido en Santo Domingo por la excelencia en el servicio, la innovación en diseños y
+                    el compromiso con la belleza y bienestar de nuestros clientes.</p>
+            </div>
+        </div>
+
+        <div class="valores-box">
+            <h3 class="titulo-seccion" style="font-size: 2rem; margin-bottom: 0;">✨ Nuestros Valores</h3>
+            <div class="valores-grid">
+                <span class="valor-badge">Profesionalismo</span>
+                <span class="valor-badge">Responsabilidad</span>
+                <span class="valor-badge">Creatividad</span>
+                <span class="valor-badge">Higiene y seguridad</span>
+                <span class="valor-badge">Puntualidad</span>
+                <span class="valor-badge">Atención personalizada</span>
+                <span class="valor-badge">Respeto hacia cada cliente</span>
+            </div>
+        </div>
+
+        <!-- ================= ORGANIGRAMA ================= -->
+        <div class="org-wrapper">
+            <h2 class="titulo-seccion">👥 Nuestro Equipo Profesional</h2>
+            <p style="text-align: center; margin-bottom: 50px; font-size: 1.1rem; color: var(--gris);">✨ 12 personas
+                dedicadas a hacer de tu experiencia algo único ✨</p>
+
+            <div class="org-nivel1">
+                <div class="org-card direccion">
+                    <img src="imagenes/Franchesca Arianny Berroa.jfif" alt="Directora" class="org-foto">
+                    <h4>Franchesca Arianny Berroa Polanco</h4>
+                    <div class="org-puesto">Directora General</div>
+                    <p class="org-descripcion">Lidera la visión estratégica del salón, supervisa todas las operaciones y
+                        garantiza la excelencia en cada servicio. Con más de 10 años de experiencia en el sector
+                        belleza.</p>
+                </div>
+            </div>
+
+            <div class="org-nivel2">
+                <!-- ÁREA ADMINISTRATIVA -->
+                <div class="org-area">
+                    <h4 class="area-title">📋 Administración</h4>
+                    <div class="org-grid">
+                        <div class="org-card">
+                            <img src="imagenes/Zuleica del rosario.jfif" alt="Administradora" class="org-foto">
+                            <h4>Zuleica Del Rosario</h4>
+                            <div class="org-puesto">Administradora</div>
+                            <p class="org-descripcion">Coordina las operaciones diarias, gestión del equipo y atención a
+                                proveedores.</p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/referencia de foto.jfif" alt="Recepcionista" class="org-foto">
+                            <h4>Sofía Ramírez</h4>
+                            <div class="org-puesto">Recepcionista</div>
+                            <p class="org-descripcion">Atención al cliente, gestión de citas y bienvenida en el salón.
+                            </p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/referencia de foto.jfif" alt="Financiera" class="org-foto">
+                            <h4>Laura Jiménez</h4>
+                            <div class="org-puesto">Encargada Financiera</div>
+                            <p class="org-descripcion">Control de pagos, facturación, nómina y gestión de gastos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÁREA DE SERVICIOS -->
+                <div class="org-area">
+                    <h4 class="area-title">💅 Servicios</h4>
+                    <div class="org-grid">
+                        <div class="org-card">
+                            <img src="imagenes/Jerry Guillaume.jfif" alt="Senior" class="org-foto">
+                            <h4>Jerry Guillaume</h4>
+                            <div class="org-puesto">Nail Artist Senior</div>
+                            <p class="org-descripcion">Especialista en diseños avanzados y técnica de uñas acrílicas.
+                            </p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/Shaina.jpeg" alt="Acrílicas" class="org-foto">
+                            <h4>Shaina Hernandez</h4>
+                            <div class="org-puesto">Uñas Acrílicas</div>
+                            <p class="org-descripcion">Especialista en aplicación y mantenimiento de uñas acrílicas.</p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/Denis.jpeg" alt="Manicurista" class="org-foto">
+                            <h4>Denis Saritaba</h4>
+                            <div class="org-puesto">Manicurista</div>
+                            <p class="org-descripcion">Cuidado y esmaltado de manos, aplicación de esmaltado en gel.</p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/Gaudelin Beriguete.jpeg" alt="Pedicurista" class="org-foto">
+                            <h4>Gaudelin Beriguete</h4>
+                            <div class="org-puesto">Pedicurista</div>
+                            <p class="org-descripcion">Cuidado y esmaltado de pies, tratamientos de spa.</p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/Scarlet Caceres.jpeg" alt="Nail Art" class="org-foto">
+                            <h4>Scarlet Caceres</h4>
+                            <div class="org-puesto">Especialista Nail Art</div>
+                            <p class="org-descripcion">Diseños artísticos personalizados, técnicas 3D y decoración
+                                avanzada.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÁREA DE APOYO -->
+                <div class="org-area">
+                    <h4 class="area-title">🧼 Apoyo</h4>
+                    <div class="org-grid">
+                        <div class="org-card">
+                            <img src="imagenes/Yeuri batista.jfif" alt="Higiene" class="org-foto">
+                            <h4>Yeuri Batista</h4>
+                            <div class="org-puesto">Jefe de Higiene</div>
+                            <p class="org-descripcion">Responsable de la esterilización y normas de bioseguridad.</p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/Roxelen Soler.jpeg" alt="Marketing" class="org-foto">
+                            <h4>Roxelen Soler</h4>
+                            <div class="org-puesto">Marketing</div>
+                            <p class="org-descripcion">Publicidad, contenido digital, manejo de redes sociales.</p>
+                        </div>
+                        <div class="org-card">
+                            <img src="imagenes/Francelis Horton.jpeg" alt="Inventario" class="org-foto">
+                            <h4>Francelis Horton</h4>
+                            <div class="org-puesto">Inventario</div>
+                            <p class="org-descripcion">Control de materiales, compras y gestión de stock de productos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            // Crear overlay
+            let overlay = document.querySelector('.menu-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'menu-overlay';
+                document.body.appendChild(overlay);
+            }
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+                });
+
+                // Cerrar al hacer clic en un enlace
+                document.querySelectorAll('.menu a').forEach(link => {
+                    link.addEventListener('click', function () {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                // Cerrar al hacer clic en overlay
+                overlay.addEventListener('click', function () {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+
+                // Cerrar con tecla ESC
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        });
+
+
+
+
+
+
+async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.autenticado === true) {
+            // Cambiar el texto del menú
+            const menuLogin = document.getElementById('menu-login');
+            if (menuLogin) {
+                menuLogin.textContent = '👤 ' + data.nombre;
+                menuLogin.href = 'inicia_secion.html';
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', verificarSesion);
+
+
+
+async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.autenticado === true) {
+            const menuLogin = document.getElementById('menu-login');
+            if (menuLogin) {
+                menuLogin.textContent = '👤 ' + data.nombre;
+                menuLogin.href = 'inicia_secion.html';
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', verificarSesion);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,834 @@
+<header class="header">
+    <div class="logo">
+        <img src="/imagenes/logo real. .jpg" alt="Logo Scarlet Nails" class="logo-img">
+        <h2 class="logo-nombre">Scarlet Nails</h2>
+        <title>Scarlet Nails - Nuestros Servicios</title>
+    </div>
+    <style>
+        /* ================ HEADER + SERVICIOS SCARLET NAILS ================ */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --rosa: #f5a3d3;
+            --rosa-claro: #ffe0f0;
+            --rosa-intenso: #e38bc2;
+            --negro: #111111;
+            --negro-suave: #1e1e1e;
+            --gris: #5a5a5a;
+            --gris-claro: #8a8a8a;
+            --fondo: #fffafd;
+            --blanco: #ffffff;
+            --sombra-sm: 0 10px 25px rgba(0, 0, 0, 0.03);
+            --sombra-md: 0 15px 35px rgba(0, 0, 0, 0.08);
+            --sombra-lg: 0 25px 50px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--fondo);
+            font-family: 'Poppins', sans-serif;
+            color: var(--negro);
+            line-height: 1.6;
+        }
+
+        /* ================ HEADER ================ */
+        .header {
+            background: var(--negro);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(245, 163, 211, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rosa);
+            transition: var(--transition);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            border-color: var(--blanco);
+        }
+
+        .logo-nombre {
+            color: var(--rosa);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rosa);
+            transition: var(--transition);
+        }
+
+        .menu a:hover::after,
+        .menu a.active::after {
+            width: 100%;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: var(--rosa);
+        }
+
+        /* ================ RESPONSIVE HEADER ================ */
+        @media (max-width: 992px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .menu a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-nombre {
+                font-size: 1.2rem;
+            }
+
+            .logo-img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .menu a {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+            }
+        }
+
+        /* ================ SERVICIOS ================ */
+        .servicios-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 70px 30px;
+        }
+
+        /* Títulos de lujo */
+        .titulo-seccion {
+            text-align: center;
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--negro);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .titulo-seccion::before {
+            content: '✨';
+            font-size: 2rem;
+            opacity: 0.6;
+            margin-right: 10px;
+        }
+
+        .titulo-seccion::after {
+            content: '✨';
+            font-size: 2rem;
+            opacity: 0.6;
+            margin-left: 10px;
+        }
+
+        .subtitulo-seccion {
+            text-align: center;
+            color: var(--gris);
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .subtitulo-seccion::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--rosa), var(--rosa-intenso));
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Filtros premium */
+        .buscador-categorias {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 60px;
+        }
+
+        .boton-categoria {
+            background: transparent;
+            border: 1.5px solid rgba(245, 163, 211, 0.3);
+            color: var(--negro-suave);
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .boton-categoria::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--rosa), var(--rosa-intenso));
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .boton-categoria:hover::before,
+        .boton-categoria.active::before {
+            left: 0;
+        }
+
+        .boton-categoria:hover,
+        .boton-categoria.active {
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 163, 211, 0.4);
+        }
+
+        /* Categorías */
+        .categoria-item {
+            margin-bottom: 80px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .categoria-item.oculto {
+            display: none;
+        }
+
+        .titulo-categoria {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--negro);
+            margin-bottom: 35px;
+            padding-left: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .titulo-categoria::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 35px;
+            background: linear-gradient(180deg, var(--rosa), var(--rosa-intenso));
+            border-radius: 5px;
+        }
+
+        .titulo-categoria::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--rosa), transparent);
+            transition: width 0.4s ease;
+        }
+
+        .categoria-item:hover .titulo-categoria::after {
+            width: 100%;
+        }
+
+        /* Grid de productos con espaciado profesional */
+        .grid-catalogo-hover {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 35px;
+            row-gap: 45px;
+            margin: 30px 0;
+            padding: 10px;
+        }
+
+        /* Tarjeta de producto premium */
+        .producto-hover {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            box-shadow: var(--sombra-sm);
+            transition: var(--transition);
+            background: var(--blanco);
+            margin: 0;
+        }
+
+        .producto-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.1));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .producto-hover:hover::before {
+            opacity: 1;
+        }
+
+        .producto-hover:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--sombra-lg);
+        }
+
+        .producto-img-hover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 20px;
+        }
+
+        .producto-hover:hover .producto-img-hover {
+            transform: scale(1.1);
+        }
+
+        /* Overlay de lujo */
+        .producto-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.92), rgba(30, 30, 30, 0.96));
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            color: white;
+            z-index: 2;
+        }
+
+        .producto-hover:hover .producto-overlay {
+            opacity: 1;
+        }
+
+        .producto-overlay h4 {
+            color: var(--rosa);
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transform: translateY(25px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .producto-overlay p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 18px;
+            transform: translateY(25px);
+            transition: transform 0.4s ease 0.15s;
+        }
+
+        .precio-hover {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--rosa), var(--rosa-intenso));
+            color: var(--negro);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transform: translateY(25px);
+            transition: transform 0.4s ease 0.2s, box-shadow 0.3s ease;
+        }
+
+        .producto-hover:hover .producto-overlay h4,
+        .producto-hover:hover .producto-overlay p,
+        .producto-hover:hover .precio-hover {
+            transform: translateY(0);
+        }
+
+        /* Mensaje final elegante */
+        .mensaje-final {
+            text-align: center;
+            margin-top: 80px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, rgba(245, 163, 211, 0.05), rgba(227, 139, 194, 0.02));
+            border-radius: 80px;
+            border: 1px solid rgba(245, 163, 211, 0.2);
+            transition: var(--transition);
+        }
+
+        .mensaje-final:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(245, 163, 211, 0.08);
+        }
+
+        .mensaje-final p {
+            font-size: 1.4rem;
+            color: var(--negro);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-consulta {
+            display: inline-block;
+            padding: 14px 40px;
+            background: var(--negro);
+            color: var(--rosa);
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--negro);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-consulta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--rosa), var(--rosa-intenso));
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-consulta:hover {
+            color: var(--negro);
+            border-color: transparent;
+            transform: scale(1.05);
+        }
+
+        .btn-consulta:hover::before {
+            left: 0;
+        }
+
+        /* ================ RESPONSIVE ================ */
+        @media (max-width: 992px) {
+            .servicios-container {
+                padding: 50px 20px;
+            }
+
+            .titulo-seccion {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .servicios-container {
+                padding: 40px 15px;
+            }
+
+            .titulo-seccion {
+                font-size: 2rem;
+            }
+
+            .grid-catalogo-hover {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            .titulo-categoria {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .grid-catalogo-hover {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .boton-categoria {
+                padding: 6px 14px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+    <!-- BOTÓN HAMBURGUESA (para móvil) -->
+    <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav id="nav-menu">
+        <ul class="menu">
+            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="nuestros_servicios.html">Nuestros Servicios</a></li>
+            <li><a href="agendar_citas.html">Agendar cita</a></li>
+            <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="inicia_secion.html" id="menu-login">Iniciar Sesión</a></li>
+            <li><a href="register.html" id="menu-register">Registrarse</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ===== SERVICIOS CON FILTRO ===== -->
+<section id="Servicios">
+
+    <h2 class="titulo-seccion">Nuestros Servicios</h2>
+    <p class="subtitulo-seccion">Selecciona una categoría para ver los diseños ✨</p>
+
+    <div class="buscador-categorias">
+        <button class="boton-categoria active" data-categoria="todos">✨ Todos</button>
+        <button class="boton-categoria" data-categoria="Esmaltado en Gel">💅 Esmaltado en Gel</button>
+        <button class="boton-categoria" data-categoria="acrilicas">💅 Uñas Acrílicas</button>
+        <button class="boton-categoria" data-categoria="disenos">🎨 Diseños personalizados</button>
+        <button class="boton-categoria" data-categoria="manicure">🦶 Manicure/Pedicure</button>
+    </div>
+
+    <div class="categorias-contenedor">
+
+        <!-- CATEGORÍA 1: ESMALTADO EN GEL -->
+        <div class="categoria-item" data-categoria="Esmaltado en Gel">
+            <h3 class="titulo-categoria">💅 ESMALTADO EN GEL</h3>
+            <div class="grid-catalogo-hover">
+                <div class="producto-hover">
+                    <img src="/imagenes/Gel solido.jfif" alt="Esmaltado color" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Color sólido</h4>
+                        <p>Amplia gama de colores</p>
+                        <span class="precio-hover">$400</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/gel francesa.jfif" alt="Francesa" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Francesa clásica</h4>
+                        <p>Elegante y sofisticada</p>
+                        <span class="precio-hover">$500</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/Gel blanco.jpg" alt="Blanco" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>En blanco</h4>
+                        <p>Elegancia y glamour</p>
+                        <span class="precio-hover">$500</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/GEL rojo senxual.jpg" alt="Rojo vino" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Efecto espejo</h4>
+                        <p>Efecto magnético</p>
+                        <span class="precio-hover">$550</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/efecto ojo de gato.jpg" alt="Rojo vino" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Efecto ojo de gato</h4>
+                        <p>Reflejo resuciente</p>
+                        <span class="precio-hover">$800</span>
+                    </div>
+                </div>
+
+                <div class="producto-hover">
+                    <img src="/imagenes/en verde.jpg" alt="verde" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Efecto verde</h4>
+                        <p>Natural y elegante</p>
+                        <span class="precio-hover">$800</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORÍA 2: UÑAS ACRÍLICAS -->
+        <div class="categoria-item" data-categoria="acrilicas">
+            <h3 class="titulo-categoria">💅 UÑAS ACRÍLICAS</h3>
+            <div class="grid-catalogo-hover">
+                <div class="producto-hover">
+                    <img src="/imagenes/Acrilica corta.jfif" alt="Acrílicas cortas" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Estilo corto</h4>
+                        <p>Prácticas y elegantes</p>
+                        <span class="precio-hover">$1,100</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/Acrilica larga.jfif" alt="Acrílicas largas" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Estilo largo</h4>
+                        <p>Para manos impactantes</p>
+                        <span class="precio-hover">$2,00</span>
+                    </div>
+                </div>
+
+                <div class="producto-hover">
+                    <img src="/imagenes/Squileto.jfif" alt="Forma stiletto" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Forma stiletto</h4>
+                        <p>Audaz y moderno</p>
+                        <span class="precio-hover">$700</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/Color morado.jfif" alt="Color morado" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Color morado</h4>
+                        <p>audaz y moderno</p>
+                        <span class="precio-hover">$1,100</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/Almedradas en Blanco.jfif" alt="Almendradas en Blanco"
+                        class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Almendradas en Blanco</h4>
+                        <p>sencillo pero llamativo</p>
+                        <span class="precio-hover">$1,200</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/Diseño de cereza.jfif" alt="Diseño de cereza" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Diseño de cereza</h4>
+                        <p>Estilo romántico y delicado</p>
+                        <span class="precio-hover">$900</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORÍA 3: DISEÑOS PERSONALIZADOS -->
+        <div class="categoria-item" data-categoria="disenos">
+            <h3 class="titulo-categoria">🎨 DISEÑOS PERSONALIZADOS</h3>
+            <div class="grid-catalogo-hover">
+                <div class="producto-hover">
+                    <img src="/imagenes/Dise;o floral 1450.jfif" alt="Diseño floral" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Diseños florales</h4>
+                        <p>Flores pintadas a mano</p>
+                        <span class="precio-hover">$,1450</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/Efecto marmol.jfif" alt="Efecto mármol" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Efecto mármol</h4>
+                        <p>Elegancia en tus uñas</p>
+                        <span class="precio-hover">$1,500</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/u;as 3D.jfif" alt="Diseños 3D" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Decoración 3D</h4>
+                        <p>Piedras, perlas y más</p>
+                        <span class="precio-hover">$900</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/Dise;o personalizado.jfif" alt="Diseño a tu gusto" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>A tu gusto</h4>
+                        <p>Creamos tu idea</p>
+                        <span class="precio-hover">Desde $1,800</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORÍA 4: MANICURE Y PEDICURE -->
+        <div class="categoria-item" data-categoria="manicure">
+            <h3 class="titulo-categoria">🦶 MANICURE Y PEDICURE</h3>
+            <div class="grid-catalogo-hover">
+                <div class="producto-hover">
+                    <img src="/imagenes/manicure clasica.jfif" alt="Manicure clásica" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Manicure clásica</h4>
+                        <p>Corte, limado y esmalte</p>
+                        <span class="precio-hover">$400</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/pedicure completa.jfif" alt="Pedicure completa" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Pedicure completa</h4>
+                        <p>Con exfoliación y masaje</p>
+                        <span class="precio-hover">$800</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/manicure spa.jpg" alt="Manicure spa" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Manicure spa</h4>
+                        <p>Con parafina y masaje</p>
+                        <span class="precio-hover">$300</span>
+                    </div>
+                </div>
+                <div class="producto-hover">
+                    <img src="/imagenes/combo pies y mano.jfif" alt="Combo manos y pies" class="producto-img-hover">
+                    <div class="producto-overlay">
+                        <h4>Completo (manos + pies)</h4>
+                        <p>Todo incluido</p>
+                        <span class="precio-hover">$800</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mensaje-final">
+        <p>✨ ¿No encuentras lo que buscas? Pregunta por diseños personalizados ✨</p>
+        <a href="agendar_citas.html" class="btn-consulta">📱 Consultar cita</a>
+    </div>
+
+    <script>
+
+        // ================ MENÚ HAMBURGUESA ================
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+                });
+
+                document.querySelectorAll('.menu a').forEach(link => {
+                    link.addEventListener('click', function () {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+
+            // ================ FILTRO DE CATEGORÍAS ================
+            const botones = document.querySelectorAll('.boton-categoria');
+            const categorias = document.querySelectorAll('.categoria-item');
+
+            botones.forEach(boton => {
+                boton.addEventListener('click', function () {
+                    botones.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const cat = this.dataset.categoria;
+                    categorias.forEach(categoria => {
+                        if (cat === 'todos' || categoria.dataset.categoria === cat) {
+                            categoria.classList.remove('oculto');
+                        } else {
+                            categoria.classList.add('oculto');
+                        }
+                    });
+                });
+            });
+        });
+
+
+
+
+
+
+    async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.autenticado === true) {
+            // Cambiar el texto del menú
+            const menuLogin = document.getElementById('menu-login');
+            if (menuLogin) {
+                menuLogin.textContent = '👤 ' + data.nombre;
+                menuLogin.href = 'inicia_secion.html';
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', verificarSesion);
+    </script>
+
+</section>

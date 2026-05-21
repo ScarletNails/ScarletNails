@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scarlet Nails - Manicura Profesional</title>
+    <link rel="icon" href="imagenes/logo-real.jpg">
+    <style>
+        /* ================ FUENTES PROFESIONALES ================= */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        /* ================= VARIABLES GLOBALES ================= */
+        :root {
+            --rosa: #f5a3d3;
+            --rosa-oscuro: #e38bc2;
+            --negro: #1a1a1a;
+            --gris: #4d4d4d;
+            --gris-claro: #7a7a7a;
+            --fondo: #fefafc;
+            --blanco: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        /* ================= RESET Y BASE ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--fondo);
+            font-family: 'Poppins', sans-serif;
+            color: var(--negro);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ================= HEADER Y NAVEGACIÓN ================= */
+        .header {
+            background: var(--negro);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(245, 163, 211, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rosa);
+            transition: var(--transition);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            border-color: var(--blanco);
+        }
+
+        .logo-nombre {
+            color: var(--rosa);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .menu a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rosa);
+            transition: var(--transition);
+        }
+
+        .menu a:hover::after,
+        .menu a.active::after {
+            width: 100%;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            color: var(--rosa);
+        }
+
+        /* Botón hamburguesa */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--rosa);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ================= SECCIONES ================= */
+        main section {
+            display: none;
+            padding: 60px 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        main section:target {
+            display: block;
+        }
+
+        main:not(:has(section:target)) #Inicio {
+            display: block;
+        }
+
+        /* ================= TÍTULOS ================= */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--negro);
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 50px 0 30px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .titulo-seccion::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rosa), var(--rosa-oscuro));
+            border-radius: 3px;
+        }
+
+        .subtitulo-seccion {
+            text-align: center;
+            color: var(--rosa);
+            font-size: 1.1rem;
+            margin-top: -20px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* ================= INICIO ================= */
+        .inicio-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            background: linear-gradient(135deg, var(--blanco), #fff5f8);
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .inicio-header-texto {
+            flex: 1;
+        }
+
+        .frase-chiquita {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--rosa);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .frase-grande {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .texto-bienvenida {
+            color: var(--gris);
+            line-height: 1.7;
+        }
+
+        .inicio-header-imagen {
+            flex: 0 0 300px;
+        }
+
+        .foto-local {
+            width: 100%;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ================= MINI GALERÍA ================= */
+        .mini-galeria {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .foto-trabajo {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid var(--blanco);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .foto-trabajo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ================= CARDS ELEGIRNOS ================= */
+        .cards-elegir {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card-elegir {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 220px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(245, 163, 211, 0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .card-elegir:hover {
+            transform: translateY(-8px);
+            border-color: var(--rosa);
+            box-shadow: 0 20px 35px rgba(245, 163, 211, 0.1);
+        }
+
+        .card-elegir h4 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .card-elegir p {
+            color: var(--gris);
+            font-size: 0.9rem;
+        }
+
+        /* ================= SERVICIOS DESTACADOS ================= */
+        .cards-servicios-con-imagen {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .card-con-imagen {
+            display: flex;
+            background: var(--blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(245, 163, 211, 0.2);
+        }
+
+        .card-con-imagen:hover {
+            transform: translateX(8px);
+            border-color: var(--rosa);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .imagen-card {
+            width: 140px;
+            min-width: 140px;
+            height: 140px;
+            overflow: hidden;
+        }
+
+        .foto-servicio {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .card-con-imagen:hover .foto-servicio {
+            transform: scale(1.05);
+        }
+
+        .texto-card {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .texto-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .texto-card p {
+            color: var(--gris);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .texto-card .precio {
+            color: var(--rosa);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        /* ================= BOTONES ================= */
+        .botones-accion {
+            text-align: center;
+            margin: 60px auto;
+            padding: 40px 20px;
+            background: rgba(245, 163, 211, 0.05);
+            border-radius: 50px;
+            max-width: 800px;
+        }
+
+        .botones-accion h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .botones-accion p {
+            color: var(--gris);
+            margin-bottom: 25px;
+        }
+
+        .btn-llamado {
+            display: inline-block;
+            padding: 14px 35px;
+            margin: 0 10px;
+            background: var(--negro);
+            color: var(--rosa);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--negro);
+        }
+
+        .btn-llamado:hover {
+            background: var(--rosa);
+            color: var(--negro);
+            transform: translateY(-3px);
+        }
+
+        /* ================= FRASE INTERMEDIA ================= */
+        .frase-intermedia {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--blanco), #fff5f8);
+            border-radius: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .frase-intermedia p {
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--negro);
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ================= FOOTER ================= */
+        .footer {
+            background: var(--negro);
+            color: var(--blanco);
+            padding: 40px 20px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(245, 163, 211, 0.2);
+        }
+
+        .footer-contenido {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-col {
+            text-align: center;
+        }
+
+        .footer h3 {
+            color: var(--rosa);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: var(--gris-claro);
+            margin: 8px 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .copy {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(245, 163, 211, 0.1);
+            font-size: 0.8rem;
+            color: var(--gris-claro);
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 992px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            #nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 280px;
+                height: 100vh;
+                background: var(--negro);
+                padding: 100px 25px 40px;
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+
+            #nav-menu.active {
+                right: 0;
+            }
+
+            .menu {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .menu a {
+                font-size: 1.1rem;
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main section {
+                padding: 40px 15px;
+            }
+
+            .inicio-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+                gap: 30px;
+            }
+
+            .inicio-header-imagen {
+                max-width: 250px;
+                margin: 0 auto;
+            }
+
+            .frase-grande {
+                font-size: 1.8rem;
+            }
+
+            .titulo-seccion {
+                font-size: 1.8rem;
+            }
+
+            .frase-intermedia p {
+                font-size: 1.3rem;
+            }
+
+            .card-con-imagen {
+                flex-direction: column;
+            }
+
+            .imagen-card {
+                width: 100%;
+                height: 180px;
+            }
+
+            .btn-llamado {
+                display: block;
+                margin: 10px auto;
+                max-width: 250px;
+            }
+
+            .foto-trabajo {
+                width: 160px;
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-nombre {
+                font-size: 1.2rem;
+            }
+
+            .logo-img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .titulo-seccion {
+                font-size: 1.5rem;
+            }
+
+            .frase-grande {
+                font-size: 1.5rem;
+            }
+
+            .card-elegir {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* ================= MENÚ OVERLAY ================= */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/logo real. .jpg" alt="Logo Scarlet Nails" class="logo-img">
+            <h2 class="logo-nombre">Scarlet Nails</h2>
+        </div>
+
+        <!-- BOTÓN HAMBURGUESA (para móvil) -->
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-menu">
+            <ul class="menu">
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="nuestros_servicios.html">Nuestros Servicios</a></li>
+                <li><a href="agendar_citas.html">Agendar cita</a></li>
+                <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="inicia_secion.html" id="menu-login">Iniciar Sesión</a></li>
+                <li><a href="register.html" id="menu-register">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+
+        <!-- ===== INICIO ===== -->
+        <section id="Inicio">
+            <div class="inicio-header">
+                <div class="inicio-header-texto">
+                    <p class="frase-chiquita">Scarlet Nails</p>
+                    <h2 class="frase-grande">Realza tu belleza con uñas perfectas en cada detalle</h2>
+                    <p class="texto-bienvenida">En Scarlet Nails nos especializamos en transformar tus uñas en
+                        verdaderas obras de arte. Nos enfocamos en cada detalle para ofrecerte diseños modernos,
+                        elegantes y personalizados según tu estilo.</p>
+                </div>
+
+                <div class="inicio-header-imagen">
+                    <img src="imagenes/local real.jfif" alt="Nuestro local" class="foto-local">
+                </div>
+            </div>
+
+            <h3 class="titulo-seccion">✨ Mis últimas creaciones ✨</h3>
+            <div class="mini-galeria">
+                <img src="imagenes/trabajo 1.1.jfif" alt="Uñas acrílicas" class="foto-trabajo">
+                <img src="imagenes/trabajo 1.jfif" alt="Diseño personalizado" class="foto-trabajo">
+                <img src="imagenes/trabajo 3.jfif" alt="Manicura francesa" class="foto-trabajo">
+                <img src="imagenes/trabajo 4.jfif" alt="Pedicura decorada" class="foto-trabajo">
+            </div>
+
+            <h3 class="titulo-seccion">¿Por qué elegir Scarlet Nails?</h3>
+
+            <div class="cards-elegir">
+                <div class="card-elegir">
+                    <h4>Diseños Exclusivos</h4>
+                    <p>Personalizamos cada diseño según tu estilo y personalidad.</p>
+                </div>
+                <div class="card-elegir">
+                    <h4>Productos Profesionales</h4>
+                    <p>Utilizamos materiales de alta calidad para mayor duración.</p>
+                </div>
+                <div class="card-elegir">
+                    <h4>Atención Personalizada</h4>
+                    <p>Nos enfocamos en brindarte comodidad y confianza.</p>
+                </div>
+                <div class="card-elegir">
+                    <h4>Puntualidad</h4>
+                    <p>Valoramos tu tiempo ofreciendo un servicio organizado.</p>
+                </div>
+                <div class="card-elegir">
+                    <h4>Ambiente Relajante</h4>
+                    <p>Creamos un espacio cómodo y agradable para ti.</p>
+                </div>
+            </div>
+
+            <div class="frase-intermedia">
+                <p>"Porque tus manos merecen lo mejor"</p>
+            </div>
+
+            <h3 class="titulo-seccion">Servicios Destacados</h3>
+
+            <div class="cards-servicios-con-imagen">
+                <div class="card-con-imagen">
+                    <div class="imagen-card">
+                        <img src="imagenes/acrilico.jfif" alt="Uñas acrílicas" class="foto-servicio">
+                    </div>
+                    <div class="texto-card">
+                        <h4>Uñas Acrílicas</h4>
+                        <p>Diseños resistentes y elegantes.</p>
+                        <p class="precio">Desde $700 en adelante.</p>
+                    </div>
+                </div>
+
+                <div class="card-con-imagen">
+                    <div class="imagen-card">
+                        <img src="imagenes/gel.jfif" alt="Esmaltado en Gel" class="foto-servicio">
+                    </div>
+                    <div class="texto-card">
+                        <h4>Esmaltado en Gel</h4>
+                        <p>Color duradero con acabado brillante.</p>
+                        <p class="precio">Desde $450 en adelante.</p>
+                    </div>
+                </div>
+
+                <div class="card-con-imagen">
+                    <div class="imagen-card">
+                        <img src="imagenes/color morado.jfif" alt="Diseños personalizados" class="foto-servicio">
+                    </div>
+                    <div class="texto-card">
+                        <h4>Diseños Personalizados</h4>
+                        <p>Arte único adaptado a tu estilo.</p>
+                        <p class="precio">Desde $900 en adelante.</p>
+                    </div>
+                </div>
+
+                <div class="card-con-imagen">
+                    <div class="imagen-card">
+                        <img src="imagenes/pedicure y manicure.jfif" alt="Manicure y pedicure" class="foto-servicio">
+                    </div>
+                    <div class="texto-card">
+                        <h4>Manicure & Pedicure</h4>
+                        <p>Cuidado completo para manos y pies.</p>
+                        <p class="precio">$400</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botones-accion">
+                <h3>¿Lista para consentirte?</h3>
+                <p>Reserva tu cita hoy y luce uñas espectaculares</p>
+                <a href="agendar_citas.html" class="btn-llamado">📅 Agendar cita</a>
+                <a href="contacto.html" class="btn-llamado">💬 Contactarnos</a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-contenido">
+            <div class="footer-col">
+                <h3>Scarlet Nails</h3>
+                <p>📍 Santo Domingo, Este km 17 de las Américas</p>
+                <p>📞 809-490-0581</p>
+                <p>✉ scarletnails@gmail.com</p>
+            </div>
+        </div>
+        <p class="copy">
+            © 2026 Scarlet Nails | Todos los derechos reservados
+        </p>
+    </footer>
+
+    <script>
+        // ================ MENÚ HAMBURGUESA ================
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            // Crear overlay
+            let overlay = document.querySelector('.menu-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'menu-overlay';
+                document.body.appendChild(overlay);
+            }
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+                });
+
+                // Cerrar al hacer clic en un enlace
+                document.querySelectorAll('.menu a').forEach(link => {
+                    link.addEventListener('click', function () {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                // Cerrar al hacer clic en overlay
+                overlay.addEventListener('click', function () {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+
+                // Cerrar con tecla ESC
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                        menuToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // ================ MARCAR SECCIÓN ACTIVA ================
+            function marcarSeccionActiva() {
+                const sections = document.querySelectorAll('main section');
+                const links = document.querySelectorAll('.menu a');
+
+                let current = '';
+                const scrollPosition = window.scrollY + 150;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', marcarSeccionActiva);
+            window.addEventListener('load', marcarSeccionActiva);
+        });
+
+
+
+
+
+
+async function verificarSesion() {
+    try {
+        const response = await fetch('verificar_sesion.php');
+        const data = await response.json();
+        
+        if (data.autenticado === true) {
+            // Cambiar el texto del menú
+            const menuLogin = document.getElementById('menu-login');
+            if (menuLogin) {
+                menuLogin.textContent = '👤 ' + data.nombre;
+                menuLogin.href = 'inicia_secion.html';
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', verificarSesion);
+    </script>
+
+
+</body>
+
+</html>
